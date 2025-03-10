@@ -1,5 +1,9 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import { initMongoConnection } from './db/initMongoConnection.js';
 import { setupServer } from './server.js';
+console.log("MONGODB_USER:", process.env.MONGODB_USER);
 
 
 const bootstrap = async () => {
@@ -11,3 +15,4 @@ const bootstrap = async () => {
   }
 };
 bootstrap();
+console.log("MONGODB_USER:", process.env.MONGODB_USER);
