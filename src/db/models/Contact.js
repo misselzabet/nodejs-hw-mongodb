@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import mongoose from "mongoose"
 const contactsSchema = new Schema(
   {
     name: {
@@ -12,12 +11,6 @@ const contactsSchema = new Schema(
     },
     email: {
       type: String,
-      validate: {
-        validator: function (value) {
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        },
-        message: (props) => `${props.value} is not a valid email!`,
-    },
     required: false,
     },
     isFavourite: {
@@ -33,8 +26,8 @@ const contactsSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: 'version',
+    versionKey: false,
   },
 );
 
-export const ContactsCollection = mongoose.model('contacts', contactsSchema);
+export const ContactsCollection = model('contacts', contactsSchema);
