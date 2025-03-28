@@ -1,4 +1,3 @@
-
 import Joi from 'joi';
 import { emailRegexp } from '../constants/index.js';
 import { isValidObjectId } from 'mongoose';
@@ -16,4 +15,11 @@ export const registerUserSchema = Joi.object({
 export const loginUserSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
+  });
+  export const requestResetEmailSchema = Joi.object({
+    email: Joi.string().email().required(),
+  });
+  export const resetPasswordSchema = Joi.object({
+    password: Joi.string().required(),
+    token: Joi.string().required(),
   });

@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-
 const contactsSchema = new Schema(
   {
     name: {
@@ -29,11 +28,11 @@ const contactsSchema = new Schema(
       ref: 'users',
       required: true,
   },
+  photo: { type: String },
 },
   {
     timestamps: true,
     versionKey: false,
   },
 );
-
 export const ContactsCollection = model('contact', contactsSchema);
