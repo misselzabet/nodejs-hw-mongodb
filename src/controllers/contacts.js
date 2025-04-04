@@ -75,35 +75,36 @@ export const createContactController = async (req, res) => {
 };
 
 export const patchContactController = async (req, res) => {
-  const { contactId } = req.params;
-  const { _id: userId } = req.user;
-  const photo = req.file;
-
-  let photoUrl;
-
-  if (photo) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
-      photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
+    const { contactId } = req.params;
+    const { _id: userId } = req.user;
+    const photo = req.file;
+  
+    let photoUrl;
+  
+    if (photo) {
+      if (env('ENABLE_CLOUDINARY') === 'true') {
+        photoUrl = await saveFileToCloudinary(photo);
+      } else {
+        photoUrl = await saveFileToUploadDir(photo);
+      }
     }
-  }
-
-  const result = await updateContact(
-    contactId,
-    { ...req.body, photo: photoUrl },
-    userId,
-  );
-
-  if (!result) {
-    throw createHttpError(404, `Contact with id ${contactId} was not found`);
-  }
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully patched a contact!',
-    data: result,
-  });
-};
+  
+    const result = await updateContact(
+      contactId,
+      { ...req.body, photo: photoUrl },
+      userId,
+    );
+  
+    if (!result || !result.value) {
+      throw createHttpError(404, `Contact with id ${contactId} was not found`);
+    }
+  
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully patched a contact!',
+      data: result.value,
+    });
+  };
 
 export const deleteContactController = async (req, res) => {
   const { contactId } = req.params;
