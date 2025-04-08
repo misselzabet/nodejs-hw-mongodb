@@ -17,11 +17,11 @@ requestBody:
           name:
             description: "User's name"
             type: string
-            example: 'John Doe'
+            example: 'amur'
           email:
             description: "User's email"
             type: string
-            example: 'john.doe@example.com'
+            example: 'amur@example.com'
           password:
             description: "User's password"
             type: string

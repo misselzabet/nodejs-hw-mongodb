@@ -15,7 +15,7 @@ requestBody:
           email:
             description: "User's email"
             type: string
-            example: 'john.doe@example.com'
+            example: 'amur.doe@example.com'
 responses:
   '200':
     description: 'Reset password email successfully sent'
