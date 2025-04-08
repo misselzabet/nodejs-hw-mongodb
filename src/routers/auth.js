@@ -13,7 +13,7 @@ import {
   refreshUserSessionController,
   registerUserController,
   requestResetEmailController,
-  resetPasswordController
+  resetPasswordController,
 } from '../controllers/auth.js';
 const authRouter = Router();
 authRouter.post(

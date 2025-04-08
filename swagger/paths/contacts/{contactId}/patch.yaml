@@ -1,0 +1,69 @@
+tags:
+  - Contacts
+summary: Update Contact
+operationId: updateContact
+description: Update contact with provided data
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: contactId
+    required: true
+    schema:
+      type: string
+      example: '67f55334aee013d9c030b440'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: 'Contact`s name'
+            type: string
+            example: 'Amur Gog'
+          phoneNumber:
+            description: 'Contact`s phone number'
+            type: string
+            example: '+380123456789'
+          email:
+            description: 'Contact`s email'
+            type: string
+            example: 'amur@mail.com'
+          isFavourite:
+            description: 'Whether the contact is marked as a favorite'
+            type: boolean
+            example: false
+          contactType:
+            description: 'Contact`s type'
+            type: string
+            enum: ['work', 'home', 'personal']
+          photo:
+            description: 'Link to contact`s photo'
+            format: binary
+            type: string
+            example: 'https://asset.cloudinary.com/dv2wum1hu/a76959fe303b1b1558e1af808c9c7415'
+  '200':
+    description: 'Update a contact'
+    content:
+      application/json:
+        schema:
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully patched a contact!'
+            data:
+              $ref: ../../../components/schemas/contacts.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml
+  '500':
+    $ref: ../../../components/responses/500.yaml
